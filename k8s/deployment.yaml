@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ci-sess-app
+  labels:
+    app: ci-sess-app
+spec:
+  selector:
+    matchLabels:
+      app: ci-sess-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ci-sess-app
+    spec:
+      containers:
+        - name: ci-sess-app
+          image: sophy12/ci-with-sess:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80

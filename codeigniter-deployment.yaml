@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+   name: codeigniter-app-sql
+spec:
+   selector:
+      app: codeigniter-app-sql
+      tier: frontend
+   ports:
+   - protocol: "TCP"
+     port: 80
+     targetPort: 80
+   type: NodePort
+
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: codeigniterapp1
+   labels:
+      app: codeigniter-app-sql
+      tier: frontend
+spec:
+   selector:
+      matchLabels:
+         app: codeigniter-app-sql
+         tier: frontend
+   replicas: 1
+   template:
+      metadata:
+         labels:
+            app: codeigniter-app-sql
+            tier: frontend
+      spec:
+         containers:
+         - name: codeigniterapp1
+           image: sophy12/my-codeigniter-site:1.0
+           imagePullPolicy: Always
+           ports:
+           - containerPort: 80
+

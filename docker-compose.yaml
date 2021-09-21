@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    container_name: ci-no-db-app
+    image: ci-no-db-app:1.0.0
+    ports:
+      - 80:80
+
